@@ -1,0 +1,108 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# NaturalSpline
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+# Overview
+
+This package provides tools for performing natural spline polynomial extrapolations on the boundary points of a given signal and the filtered signal. In methods like **trend filtering**, boundary points often fail to converge well at the two ends. This package addresses the issue by replacing the boundary values with natural spline polynomial extrapolations.
+
+The package includes functions to compute extrapolation matrices and perform compact and non-compact extrapolations. It is especially useful for denoising applications where **trend filtering** results in inaccurate boundary estimates.
+
+---
+
+# Core Functions
+
+## Extrapolation Functions
+
+### `extrapolate_compact(x, theta, m, side)`
+Performs natural spline extrapolation in a **compact** form using a formula-based approach.
+
+- **Inputs:**
+  - `x`: A numeric vector of signal values (ordered).
+  - `theta`: A numeric vector of denoised values corresponding to `x`.
+  - `m`: Degree of the polynomial extrapolation.
+  - `side`: `"left"` or `"right"` indicating which boundary to extrapolate.
+- **Output:**
+  - A vector of extrapolated values.
+
+### `extrapolate_noncompact(x, theta, m, side)`
+Uses matrix multiplication for extrapolation. The matrices are precomputed from helper functions.
+
+- **Inputs and outputs:** Same as `extrapolate_compact`.
+
+---
+
+## Matrix Construction Functions
+
+### `compute_P_matrix(x, m, side)`
+Computes the polynomial \( P \) matrix based on the target and support points for the specified boundary (`"left"` or `"right"`).
+
+### `compute_C_matrix_withoutTheta(x, m, side)`
+Computes the coefficient \( C \) matrix (without \(\theta\)) using the natural spline formula.
+
+### `compute_A_matrix(P, C_withoutTheta)`
+Combines the \( P \) matrix and \( C \) matrix (without \(\theta\)) to compute the \( A \) matrix, which will be multiplied with the \(\theta\)) vector.
+
+---
+
+## Visualization
+
+### `plot_extrapolation(x, theta, left_result, right_result)`
+Creates a plot comparing the original signal (`x`), the denoised signal (`theta`), and the extrapolated values at the boundary.
+
+- **Features:**
+  - Plots `x` (blue line), `theta` (red line), and extrapolated points (green line for the boundary).
+
+---
+
+# Usage Example
+
+```{r example}
+library(NaturalSpline)
+
+# Input signal
+x <- c(1, 2, 4, 5, 6, 8)
+theta <- c(2.5, 3, 3.5, 4, 5, 6.5)
+m <- 3
+
+# Perform compact extrapolation
+left_result <- extrapolate_compact(x, theta, m, side = "left")
+right_result <- extrapolate_compact(x, theta, m, side = "right")
+
+# Visualize results
+plot_extrapolation(x, theta, m)
+```
+
+## Installation
+
+You can install the development version of NaturalSpline from [GitHub](https://github.com/zhoumo2716/NaturalSpline) with:
+
+```{r}
+# install.packages("pak")
+pak::pak("zhoumo2716/NaturalSpline")
+```
+
+Or with `devtools`
+```{r}
+# Install the devtools package if not already installed
+install.packages("devtools")
+
+# Install the NaturalSpline package from GitHub
+devtools::install_github("zhoumo2716/NaturalSpline")
+```
