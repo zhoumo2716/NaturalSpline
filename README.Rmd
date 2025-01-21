@@ -84,6 +84,8 @@ m <- 3
 # Perform compact extrapolation
 left_result <- extrapolate_compact(x, theta, m, side = "left")
 right_result <- extrapolate_compact(x, theta, m, side = "right")
+print(left_result)
+print(right_result)
 
 # Visualize results
 plot_extrapolation(x, theta, m)
