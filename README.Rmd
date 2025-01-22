@@ -88,12 +88,6 @@ print(left_result)
 print(right_result)
 
 # Visualize results
-n <- length(x)
-index <- seq(1, n)
-result <- theta
-result[1:m] <- left_result[1:m]
-result[(n-m+1):n] <- right_result[1:m]
-
 plot_extrapolation(x, theta, m)
 
 ```
