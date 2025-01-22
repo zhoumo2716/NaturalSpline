@@ -93,7 +93,7 @@ x <- c( 5, 5.5, 6, 4, 5, 7, 8)
 theta <- c( 4, 5, 5, 4.5, 5, 3, 2)
 m <- 3
 
-# Perform compact extrapolation
+# Perform extrapolation using the compact formula
 left_result <- extrapolate_compact(x, theta, m, side = "left")
 right_result <- extrapolate_compact(x, theta, m, side = "right")
 print(left_result)
@@ -119,14 +119,14 @@ pak::pak("zhoumo2716/NaturalSpline")
 #> 
 #> → Will update 1 package.
 #> → Will download 1 package with unknown size.
-#> + NaturalSpline 0.0.0.9000 → 0.0.0.9000 👷‍♀️🔧 ⬇ (GitHub: c61ea23)
+#> + NaturalSpline 0.0.0.9000 → 0.0.0.9000 👷🏽‍♂️🔧 ⬇ (GitHub: b873feb)
 #> 
 #> ! NaturalSpline is loaded in the current R session, you probably need to
 #> restart R after the installation.
 #> 
 #> ℹ Getting 1 pkg with unknown size
 #> ✔ Cached copy of NaturalSpline 0.0.0.9000 (source) is the latest build
-#> ✔ Installed NaturalSpline 0.0.0.9000 (github::zhoumo2716/NaturalSpline@c61ea23) (20ms)
+#> ✔ Installed NaturalSpline 0.0.0.9000 (github::zhoumo2716/NaturalSpline@b873feb) (20ms)
 #> ✔ 1 pkg: upd 1 [2.9s]
 ```
 
@@ -135,14 +135,14 @@ Or with `devtools`
 ``` r
 # Install the devtools package if not already installed
 install.packages("devtools")
-#> Installing package into '/private/var/folders/74/4fh__5010_l3tp8fpsft2ft00000gn/T/Rtmp0KgocC/temp_libpath6c3d78d20272'
+#> Installing package into '/private/var/folders/74/4fh__5010_l3tp8fpsft2ft00000gn/T/Rtmp7cgdkG/temp_libpath7f78715c28e5'
 #> (as 'lib' is unspecified)
 #> 
 #> The downloaded binary packages are in
-#>  /var/folders/74/4fh__5010_l3tp8fpsft2ft00000gn/T//RtmpuvOReM/downloaded_packages
+#>  /var/folders/74/4fh__5010_l3tp8fpsft2ft00000gn/T//RtmpWsSsNM/downloaded_packages
 
 # Install the NaturalSpline package from GitHub
 devtools::install_github("zhoumo2716/NaturalSpline")
-#> Skipping install of 'NaturalSpline' from a github remote, the SHA1 (c61ea235) has not changed since last install.
+#> Skipping install of 'NaturalSpline' from a github remote, the SHA1 (b873febd) has not changed since last install.
 #>   Use `force = TRUE` to force installation
 ```
