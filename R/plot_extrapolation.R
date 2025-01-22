@@ -27,7 +27,7 @@ plot_extrapolation <- function(x, theta, m) {
   # Plot the original x
   plot(index, x, type = "b", col = "blue", pch = 19, lwd = 2,
        xlab = "Index", ylab = "Values", ylim = range(c(x, theta, result)),
-       main = "Results")
+       main = "x in blue, theta in red, result in green")
   
   # Add theta points
   points(index, theta, col = "red", pch = 19)
@@ -40,9 +40,5 @@ plot_extrapolation <- function(x, theta, m) {
   # Add right extrapolated points
   points(index, result, col = "green", pch = 19)
   lines(index, result, col = "green", lwd = 2, lty = 2)
-  
-  # Add a legend
-  legend("topright", legend = c("Original x", "Smoothed Theta", "Extrapolated"),
-         col = c("blue", "red", "green"), pch = 19, lty = c(1, 2, 2), lwd = 2, inset = c(0, -0.485), xpd=TRUE)
   
 }
