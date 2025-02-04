@@ -91,15 +91,32 @@ library(NaturalSpline)
 # Input signal
 x <- c( 1, 2, 3, 4, 5, 6, 7)
 theta <- c( 7, 2, 1, 4.5, 5, 3, 9)
-m <- 3
+m <- 2
 
-# Perform extrapolation using the compact formula
-left_result <- extrapolate_compact(x, theta, m, side = "left")
-right_result <- extrapolate_compact(x, theta, m, side = "right")
-print(left_result)
-#> [1] -12.0  -4.0   1.5
-print(right_result)
-#> [1] 12.5 25.0 42.0
+# Perform extrapolation using different formula
+left_result1 <- extrapolate_compact(x, theta, m, side = "left")
+right_result1 <- extrapolate_compact(x, theta, m, side = "right")
+
+left_result2 <- extrapolate_noncompact(x, theta, m, side = "left")
+right_result2 <- extrapolate_noncompact(x, theta, m, side = "right")
+
+A <- full_A_matrix(x, m)
+result3 <- A %*% theta
+
+cat("left_result1: ", left_result1)
+#> left_result1:  -6 -2.5
+cat(" left_result2: ", left_result2)
+#>  left_result2:  -6 -2.5
+
+cat("\nright_result1: ", right_result1)
+#> 
+#> right_result1:  5.5 6
+cat(" right_result2: ", right_result2)
+#>  right_result2:  5.5 6
+
+cat("\nresult3: ", result3)
+#> 
+#> result3:  -6 -2.5 1 4.5 5 5.5 6
 
 # Visualize results
 plot_extrapolation(x, theta, m)
@@ -119,19 +136,19 @@ pak::pak("zhoumo2716/NaturalSpline")
 #> 
 #> → Will update 1 package.
 #> → Will download 1 package with unknown size.
-#> + NaturalSpline 0.0.0.9000 → 0.0.0.9000 👷‍♀️🔧 ⬇ (GitHub: d756494)
+#> + NaturalSpline 0.0.0.9000 → 0.0.0.9000 👷🏻🔧 ⬇ (GitHub: aebc3e7)
 #> 
 #> ! NaturalSpline is loaded in the current R session, you probably need to
 #> restart R after the installation.
 #> 
 #> ℹ Getting 1 pkg with unknown size
-#> ✔ Got NaturalSpline 0.0.0.9000 (source) (46.17 kB)
+#> ✔ Got NaturalSpline 0.0.0.9000 (source) (40.42 kB)
 #> ℹ Packaging NaturalSpline 0.0.0.9000
-#> ✔ Packaged NaturalSpline 0.0.0.9000 (598ms)
+#> ✔ Packaged NaturalSpline 0.0.0.9000 (429ms)
 #> ℹ Building NaturalSpline 0.0.0.9000
-#> ✔ Built NaturalSpline 0.0.0.9000 (744ms)
-#> ✔ Installed NaturalSpline 0.0.0.9000 (github::zhoumo2716/NaturalSpline@d756494) (21ms)
-#> ✔ 1 pkg: upd 1, dld 1 (NA B) [10.7s]
+#> ✔ Built NaturalSpline 0.0.0.9000 (1.2s)
+#> ✔ Installed NaturalSpline 0.0.0.9000 (github::zhoumo2716/NaturalSpline@aebc3e7) (26ms)
+#> ✔ 1 pkg: upd 1, dld 1 (NA B) [6.7s]
 ```
 
 Or with `devtools`
@@ -139,14 +156,14 @@ Or with `devtools`
 ``` r
 # Install the devtools package if not already installed
 install.packages("devtools")
-#> Installing package into '/private/var/folders/74/4fh__5010_l3tp8fpsft2ft00000gn/T/RtmpiaGPmS/temp_libpathe7c335a90161'
+#> Installing package into '/private/var/folders/74/4fh__5010_l3tp8fpsft2ft00000gn/T/RtmpiaGPmS/temp_libpathe7c32b81ea51'
 #> (as 'lib' is unspecified)
 #> 
 #> The downloaded binary packages are in
-#>  /var/folders/74/4fh__5010_l3tp8fpsft2ft00000gn/T//RtmpAL5Dvs/downloaded_packages
+#>  /var/folders/74/4fh__5010_l3tp8fpsft2ft00000gn/T//RtmppgxI8o/downloaded_packages
 
 # Install the NaturalSpline package from GitHub
 devtools::install_github("zhoumo2716/NaturalSpline")
-#> Skipping install of 'NaturalSpline' from a github remote, the SHA1 (d7564940) has not changed since last install.
+#> Skipping install of 'NaturalSpline' from a github remote, the SHA1 (aebc3e7e) has not changed since last install.
 #>   Use `force = TRUE` to force installation
 ```

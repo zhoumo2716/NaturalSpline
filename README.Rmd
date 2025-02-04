@@ -79,13 +79,25 @@ library(NaturalSpline)
 # Input signal
 x <- c( 1, 2, 3, 4, 5, 6, 7)
 theta <- c( 7, 2, 1, 4.5, 5, 3, 9)
-m <- 3
+m <- 2
 
-# Perform extrapolation using the compact formula
-left_result <- extrapolate_compact(x, theta, m, side = "left")
-right_result <- extrapolate_compact(x, theta, m, side = "right")
-print(left_result)
-print(right_result)
+# Perform extrapolation using different formula
+left_result1 <- extrapolate_compact(x, theta, m, side = "left")
+right_result1 <- extrapolate_compact(x, theta, m, side = "right")
+
+left_result2 <- extrapolate_noncompact(x, theta, m, side = "left")
+right_result2 <- extrapolate_noncompact(x, theta, m, side = "right")
+
+A <- full_A_matrix(x, m)
+result3 <- A %*% theta
+
+cat("left_result1: ", left_result1)
+cat(" left_result2: ", left_result2)
+
+cat("\nright_result1: ", right_result1)
+cat(" right_result2: ", right_result2)
+
+cat("\nresult3: ", result3)
 
 # Visualize results
 plot_extrapolation(x, theta, m)
