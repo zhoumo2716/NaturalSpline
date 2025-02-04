@@ -54,19 +54,21 @@ precomputed from helper functions.
 
 ### `compute_P_matrix(x, m, side)`
 
-Computes the polynomial $`P`$ matrix based on the target and support
+Computes the polynomial $`P`$ matrix at one side based on the target and support
 points for the specified boundary (`"left"` or `"right"`).
 
 ### `compute_C_matrix_withoutTheta(x, m, side)`
 
-Computes the coefficient $`C`$ matrix (without $`\theta`$) using the
-natural spline formula.
+Computes the coefficient $`C`$ matrix (without $`\theta`$) at one side using the natural spline formula.
 
 ### `compute_A_matrix(P, C_withoutTheta)`
 
 Combines the $`P`$ matrix and $`C`$ matrix (without $`\theta`$) to
-compute the $`A`$ matrix, which will be multiplied with the $`\theta`$)
-vector.
+compute the $`A`$ matrix, which will be multiplied with the left or right $`\theta`$ vector.
+
+### `full_A_matrix(x, m)`
+
+Combines the left and right matrix with diagonals in between, which will be multiplied with the whole $`\theta`$ vector.
 
 ------------------------------------------------------------------------
 
