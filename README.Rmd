@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 
 # Overview
 
-This package provides tools for performing natural spline polynomial extrapolations on the boundary points of a given signal and the filtered signal. In methods like **trend filtering**, boundary points often fail to converge well at the two ends. This package addresses the issue by replacing the boundary values with natural spline polynomial extrapolations.
+This package provides tools for performing natural spline polynomial extrapolations on the boundary points of a given input vector **x** and a given corresponding vector **f(x)**. In methods like **trend filtering**, boundary points often fail to converge well at the two ends. This package addresses the issue by replacing the boundary values with natural spline polynomial extrapolations.
 
 The package includes functions to compute extrapolation matrices and perform compact and non-compact extrapolations. It is especially useful for denoising applications where **trend filtering** results in inaccurate boundary estimates.
 
@@ -34,8 +34,8 @@ The package includes functions to compute extrapolation matrices and perform com
 Performs natural spline extrapolation in a **compact** form using a formula-based approach.
 
 - **Inputs:**
-  - `x`: A numeric vector of signal values (ordered).
-  - `theta`: A numeric vector of denoised values corresponding to `x`.
+  - `x`: A numeric vector of inputs.
+  - `theta`: A numeric vector corresponding to `f(x)`.
   - `m`: Degree of the polynomial extrapolation.
   - `side`: `"left"` or `"right"` indicating which boundary to extrapolate.
 - **Output:**
@@ -77,8 +77,8 @@ Creates a plot comparing the original signal (`x`), the denoised signal (`theta`
 library(NaturalSpline)
 
 # Input signal
-x <- c( 5, 5.5, 6, 4, 5, 7, 8)
-theta <- c( 4, 5, 5, 4.5, 5, 3, 2)
+x <- c( 1, 2, 3, 4, 5, 6, 7)
+theta <- c( 7, 2, 1, 4.5, 5, 3, 9)
 m <- 3
 
 # Perform extrapolation using the compact formula

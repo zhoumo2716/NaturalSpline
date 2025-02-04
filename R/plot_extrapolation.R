@@ -16,8 +16,7 @@ plot_extrapolation <- function(x, theta, m) {
   right_result <- extrapolate_noncompact(x, theta, m, side = "right")
   
   # Indices
-  n <- length(x)
-  index <- seq(1, n)
+  n <- length(theta)
   result <- theta
   result[1:m] <- left_result[1:m]
   #result[n-m+1:n] <- right_result
@@ -25,20 +24,12 @@ plot_extrapolation <- function(x, theta, m) {
   
   
   # Plot the original x
-  plot(index, x, type = "b", col = "blue", pch = 19, lwd = 2,
-       xlab = "Index", ylab = "Values", ylim = range(c(x, theta, result)),
-       main = "x in blue, theta in red, result in green")
+  plot(x, theta, type = "b", col = "blue", pch = 19, lwd = 2,
+       xlab = "x", ylab = "f(x)", ylim = range(c(theta, result)),
+       main = "original theta in blue, extrapolated result in red")
   
-  # Add theta points
-  points(index, theta, col = "red", pch = 19)
-  lines(index, theta, col = "red", lwd = 2, lty = 2)
-  
-  # Add left extrapolated points
-  #points(left_index, left_result, col = "green", pch = 19)
-  #lines(left_index, left_result, col = "green", lwd = 2, lty = 2)
-  
-  # Add right extrapolated points
-  points(index, result, col = "green", pch = 19)
-  lines(index, result, col = "green", lwd = 2, lty = 2)
+  # Add extrapolated points
+  points(x, result, col = "red", pch = 19)
+  lines(x, result, col = "red", lwd = 2, lty = 2)
   
 }
