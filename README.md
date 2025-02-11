@@ -54,21 +54,19 @@ precomputed from helper functions.
 
 ### `compute_P_matrix(x, m, side)`
 
-Computes the polynomial $`P`$ matrix at one side based on the target and support
+Computes the polynomial $`P`$ matrix based on the target and support
 points for the specified boundary (`"left"` or `"right"`).
 
 ### `compute_C_matrix_withoutTheta(x, m, side)`
 
-Computes the coefficient $`C`$ matrix (without $`\theta`$) at one side using the natural spline formula.
+Computes the coefficient $`C`$ matrix (without $`\theta`$) using the
+natural spline formula.
 
 ### `compute_A_matrix(P, C_withoutTheta)`
 
 Combines the $`P`$ matrix and $`C`$ matrix (without $`\theta`$) to
-compute the $`A`$ matrix, which will be multiplied with the left or right $`\theta`$ vector.
-
-### `full_A_matrix(x, m)`
-
-Combines the left and right matrix with diagonals in between, which will be multiplied with the whole $`\theta`$ vector.
+compute the $`A`$ matrix, which will be multiplied with the $`\theta`$)
+vector.
 
 ------------------------------------------------------------------------
 
@@ -105,6 +103,10 @@ right_result2 <- extrapolate_noncompact(x, theta, m, side = "right")
 A <- full_A_matrix(x, m)
 result3 <- A %*% theta
 
+A_rcpp <- ns_matrix(x, m)
+all.equal(A_rcpp, A)
+#> [1] TRUE
+
 cat("left_result1: ", left_result1)
 #> left_result1:  -6 -2.5
 cat(" left_result2: ", left_result2)
@@ -135,22 +137,33 @@ You can install the development version of NaturalSpline from
 # install.packages("pak")
 pak::pak("zhoumo2716/NaturalSpline")
 #> ! Using bundled GitHub PAT. Please add your own PAT using `gitcreds::gitcreds_set()`.
+#> ℹ Loading metadata database
+#> ✔ Loading metadata database ... done
 #> 
+#> 
+#> → Will install 2 packages.
 #> → Will update 1 package.
+#> → Will download 2 CRAN packages (5.02 MB).
 #> → Will download 1 package with unknown size.
-#> + NaturalSpline 0.0.0.9000 → 0.0.0.9000 👷🏻🔧 ⬇ (GitHub: aebc3e7)
+#> + NaturalSpline 0.0.0.9000 → 0.0.0.9000 👷🏽‍♀️🔧 ⬇ (GitHub: 1541de8)
+#> + Rcpp                       1.0.14      ⬇ (3.36 MB)
+#> + RcppArmadillo              14.2.3-1    ⬇ (1.67 MB)
 #> 
 #> ! NaturalSpline is loaded in the current R session, you probably need to
 #> restart R after the installation.
 #> 
-#> ℹ Getting 1 pkg with unknown size
-#> ✔ Got NaturalSpline 0.0.0.9000 (source) (40.42 kB)
+#> ℹ Getting 2 pkgs (5.02 MB) and 1 pkg with unknown size
+#> ✔ Got RcppArmadillo 14.2.3-1 (aarch64-apple-darwin20) (1.67 MB)
+#> ✔ Got NaturalSpline 0.0.0.9000 (source) (49.41 kB)
+#> ✔ Got Rcpp 1.0.14 (aarch64-apple-darwin20) (3.35 MB)
+#> ✔ Installed RcppArmadillo 14.2.3-1  (160ms)
+#> ✔ Installed Rcpp 1.0.14  (178ms)
 #> ℹ Packaging NaturalSpline 0.0.0.9000
-#> ✔ Packaged NaturalSpline 0.0.0.9000 (429ms)
+#> ✔ Packaged NaturalSpline 0.0.0.9000 (537ms)
 #> ℹ Building NaturalSpline 0.0.0.9000
-#> ✔ Built NaturalSpline 0.0.0.9000 (1.2s)
-#> ✔ Installed NaturalSpline 0.0.0.9000 (github::zhoumo2716/NaturalSpline@aebc3e7) (26ms)
-#> ✔ 1 pkg: upd 1, dld 1 (NA B) [6.7s]
+#> ✔ Built NaturalSpline 0.0.0.9000 (7.3s)
+#> ✔ Installed NaturalSpline 0.0.0.9000 (github::zhoumo2716/NaturalSpline@1541de8) (32ms)
+#> ✔ 1 pkg + 2 deps: upd 1, added 2, dld 3 (NA B) [16.5s]
 ```
 
 Or with `devtools`
@@ -158,14 +171,14 @@ Or with `devtools`
 ``` r
 # Install the devtools package if not already installed
 install.packages("devtools")
-#> Installing package into '/private/var/folders/74/4fh__5010_l3tp8fpsft2ft00000gn/T/RtmpiaGPmS/temp_libpathe7c32b81ea51'
+#> Installing package into '/private/var/folders/74/4fh__5010_l3tp8fpsft2ft00000gn/T/Rtmp2A8WXV/temp_libpath732236c5f928'
 #> (as 'lib' is unspecified)
 #> 
 #> The downloaded binary packages are in
-#>  /var/folders/74/4fh__5010_l3tp8fpsft2ft00000gn/T//RtmppgxI8o/downloaded_packages
+#>  /var/folders/74/4fh__5010_l3tp8fpsft2ft00000gn/T//RtmpO77bjr/downloaded_packages
 
 # Install the NaturalSpline package from GitHub
 devtools::install_github("zhoumo2716/NaturalSpline")
-#> Skipping install of 'NaturalSpline' from a github remote, the SHA1 (aebc3e7e) has not changed since last install.
+#> Skipping install of 'NaturalSpline' from a github remote, the SHA1 (1541de80) has not changed since last install.
 #>   Use `force = TRUE` to force installation
 ```

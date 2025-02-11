@@ -91,6 +91,9 @@ right_result2 <- extrapolate_noncompact(x, theta, m, side = "right")
 A <- full_A_matrix(x, m)
 result3 <- A %*% theta
 
+A_rcpp <- ns_matrix(x, m)
+all.equal(A_rcpp, A)
+
 cat("left_result1: ", left_result1)
 cat(" left_result2: ", left_result2)
 
